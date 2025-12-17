@@ -1,0 +1,445 @@
+/* Main Layout */
+.main {
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  /* background-color: #ffffff; -> Removed to show body gradient */
+}
+
+/* Top Navigation */
+.main .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 22px;
+  padding: 20px 30px;
+  color: var(--text-secondary);
+  backdrop-filter: blur(4px);
+}
+
+.main .nav p {
+  font-weight: 500;
+  color: var(--text-primary);
+  text-shadow: 0 0 10px rgba(0, 198, 251, 0.4);
+}
+
+.main .nav img {
+  width: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid var(--border-color);
+  transition: transform 0.2s ease;
+}
+
+.main .nav img:hover {
+  transform: scale(1.1);
+  border-color: #00c6fb;
+  box-shadow: 0 0 15px rgba(0, 198, 251, 0.4);
+}
+
+/* Container */
+.main-container {
+  max-width: 960px;
+  margin: auto;
+  width: 100%;
+  padding: 0 20px;
+}
+
+/* Greeting */
+.main .greet {
+  margin: 50px 0;
+  font-size: 64px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.main .greet span {
+  background: linear-gradient(to right, #4facfe 0%, #00f2fe 50%, #4facfe 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 5px rgba(0, 198, 251, 0.3));
+  animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.main .greet p:last-child {
+  font-size: 40px;
+  font-weight: 400;
+  margin-top: 10px;
+}
+
+/* Cards */
+.main .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.main .card {
+  height: 220px;
+  padding: 25px;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-effect);
+  -webkit-backdrop-filter: var(--glass-effect);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+.main .card:hover {
+  background: var(--bg-card-hover);
+  border-color: #005bea;
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-glow);
+}
+
+.main .card p {
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  transition: color 0.3s;
+}
+
+.main .card:hover p {
+  color: var(--text-primary);
+}
+
+.main .card img {
+  width: 45px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  filter: invert(1);
+  transition: var(--transition);
+}
+
+.main .card:hover img {
+  background: var(--text-primary);
+  filter: invert(0);
+}
+
+/* Result (Chat Area) */
+/* Main Chat Area */
+.result {
+  flex: 1;
+  padding: 0 5%;
+  overflow-y: auto;
+  max-height: calc(100vh - 180px);
+  /* Adjust for height of nav + input */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  scroll-behavior: smooth;
+}
+
+.result::-webkit-scrollbar {
+  width: 8px;
+}
+
+.result::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.result::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+/* Chat Message Bubbles */
+.chat-message {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  max-width: 80%;
+  animation: fadeIn 0.3s ease;
+}
+
+.chat-message.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.chat-message.bot {
+  align-self: flex-start;
+}
+
+.chat-bubble {
+  padding: 15px 20px;
+  border-radius: 18px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  position: relative;
+  word-wrap: break-word;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-message.bot .chat-bubble {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-top-left-radius: 4px;
+}
+
+.chat-message.user .chat-bubble {
+  background: var(--primary-gradient);
+  color: #fff;
+  border-top-right-radius: 4px;
+  /* Remove border for user to look like a "sent" bubble */
+}
+
+/* Icons in Chat */
+.chat-message img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+.chat-message.bot img {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5px;
+}
+
+/* Typing Indicator (Three Dots) */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 15px 20px;
+  background: var(--bg-card);
+  border-radius: 18px;
+  border-top-left-radius: 4px;
+  width: fit-content;
+  border: 1px solid var(--border-color);
+  margin-bottom: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--text-secondary);
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.typing-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+
+  40% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Markdown Styles in Chat */
+.chat-bubble b,
+.chat-bubble strong {
+  font-weight: 600;
+}
+
+.chat-bubble pre {
+  background: rgba(0, 0, 0, 0.4);
+  /* Dark background for code block */
+  padding: 15px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 10px 0;
+  font-family: 'Consolas', 'Monaco', monospace;
+  border: 1px solid var(--border-color);
+}
+
+.chat-bubble code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+/* Greeting (when no chat) */
+.greet {
+  text-align: center;
+  margin-top: 10vh;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  transition: var(--transition);
+}
+
+.theme-toggle:hover {
+  background: var(--bg-card-hover);
+  transform: rotate(30deg);
+}
+
+/* Bottom Input Area Adjustments */
+.main-bottom {
+  background: transparent;
+  backdrop-filter: blur(2px);
+}
+
+/* Bottom Input Area */
+.main-bottom {
+  position: sticky;
+  bottom: 0;
+  background: transparent;
+  /* Transparent to show particles/bg */
+  padding: 20px 0 40px;
+  background-image: linear-gradient(to top, #0a0e17 80%, transparent);
+  /* Fade out top */
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: var(--bg-input);
+  padding: 15px 30px;
+  border-radius: 50px;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 900px;
+  margin: 0 auto;
+  transition: var(--transition);
+}
+
+.search-box:focus-within {
+  border-color: #005bea;
+  box-shadow: 0 0 25px rgba(0, 91, 234, 0.25);
+}
+
+.search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.search-box input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-box img {
+  width: 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  filter: invert(1);
+  opacity: 0.7;
+}
+
+.search-box img:hover {
+  transform: scale(1.15);
+  filter: invert(1) drop-shadow(0 0 5px #fff);
+  opacity: 1;
+}
+
+.search-box div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Bottom Info */
+.bottom-info {
+  font-size: 13px;
+  margin-top: 15px;
+  text-align: center;
+  color: var(--text-muted);
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .main .nav {
+    font-size: 18px;
+    padding: 15px;
+  }
+
+  .main .greet {
+    font-size: 36px;
+    margin: 30px 0;
+  }
+
+  .main .greet p:last-child {
+    font-size: 22px;
+  }
+
+  .result-data p {
+    font-size: 16px;
+  }
+
+  .main .card {
+    height: 180px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .main .greet {
+    font-size: 32px;
+  }
+
+  .search-box {
+    padding: 10px 20px;
+  }
+
+  .search-box img {
+    width: 20px;
+  }
+}

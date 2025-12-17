@@ -1,0 +1,13 @@
+/* App Layout */
+.app {
+  display: flex;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Desktop offset for sidebar */
+@media (min-width: 769px) {
+  .main {
+    margin-left: 260px;
+  }
+}

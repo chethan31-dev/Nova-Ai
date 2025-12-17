@@ -1,0 +1,143 @@
+.sidebar {
+  min-height: 100vh;
+  width: 80px;
+  /* Collapsed width */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--bg-sidebar);
+  backdrop-filter: var(--glass-effect);
+  -webkit-backdrop-filter: var(--glass-effect);
+  border-right: 1px solid var(--border-color);
+  padding: 25px 20px;
+  transition: width 0.3s ease, background-color 0.3s ease;
+  overflow: hidden;
+  /* Hide overflow content in collapsed State */
+}
+
+.sidebar.extended {
+  width: 280px;
+}
+
+.sidebar img {
+  width: 22px;
+  filter: invert(1);
+  /* Invert icons for dark mode if they are black */
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+.sidebar .menu {
+  display: block;
+  margin-left: 0;
+  cursor: pointer;
+}
+
+.sidebar .new-chat {
+  margin-top: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.sidebar .new-chat:hover {
+  background-color: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-glow);
+  color: var(--text-primary);
+}
+
+.sidebar .new-chat img {
+  width: 18px;
+  opacity: 1;
+}
+
+.sidebar .recent {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  animation: fadeIn 0.5s ease;
+}
+
+.sidebar .recent-title {
+  margin: 20px 0 15px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.sidebar .recent-entry {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  border-radius: 50px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 5px;
+}
+
+.sidebar .recent-entry:hover {
+  background-color: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.sidebar .recent-entry img {
+  margin-right: 5px;
+}
+
+.sidebar .recent-entry p {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar .bottom {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .bottom-item {
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transform: translateX(-100%);
+    background-color: #0a0e17;
+    /* Solid bg for mobile drawer */
+  }
+
+  .sidebar.extended {
+    transform: translateX(0);
+    box-shadow: 10px 0 20px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
